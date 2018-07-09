@@ -1,0 +1,69 @@
+<div class="clearfix mt-5"></div>
+<div class="row">
+  <div class="col-md-12 ">
+
+    <form #answer="ngForm" (ngSubmit)="onSubmit(answer.value)" >
+
+      <div class="card mt-2" *ngFor="let question of questions">
+        <div class="card-header">
+          {{ question.title }}
+
+        </div>
+        <div class="card-body">
+
+          <input *ngIf="question.question_type == 'fillintheblank'" type="text" class="form-control" name="{{question.id}}" ngModel>
+
+          <textarea *ngIf="question.question_type == 'textarea'" type="text" class="form-control" name="{{question.id}}" ngModel></textarea>
+          <!-- SINGLE CORRECT -->
+          <div class="row"  *ngIf="question.question_type == 'single'">
+            <div class="col-md-6">
+
+                  <input type="radio" value="yes"  required name="{{question.id}}" ngModel> YES
+            </div>
+            <div class="col-md-6">
+                  <input type="radio" value="no"  required name="{{question.id}}" ngModel> NO
+            </div>
+          </div>
+          <!-- END SINGLE CORRECT -->
+
+
+                   <!-- SINGLE CORRECT -->
+                   <div class="row"  *ngIf="question.question_type == 'ratings'">
+                    <div class="col-md-2 col-md-offset-1">
+
+                          <input type="radio" value="1"  required name="{{question.id}}" ngModel> 1
+                    </div>
+                    <div class="col-md-2">
+                          <input type="radio" value="2"  required name="{{question.id}}" ngModel> 2
+                    </div>
+                    <div class="col-md-2">
+                      <input type="radio" value="3"  required name="{{question.id}}" ngModel> 3
+                </div>
+                <div class="col-md-2">
+                  <input type="radio" value="4"  required name="{{question.id}}" ngModel> 4
+            </div>
+            <div class="col-md-2">
+              <input type="radio" value="5"  required name="{{question.id}}" ngModel> 5
+        </div>
+                  </div>
+                  <!-- END SINGLE CORRECT -->
+
+          <!-- MULTIPLE CORRECT -->
+          <div class="row"  *ngIf="question.question_type == 'multiple'">
+            <div class="col-md-12" *ngFor="let option of question.options" >
+              <input type="checkbox" name="options[{{question.id}}][{{option.id}}]" ngModel> {{ option.text }}
+            </div>
+
+          </div>
+          <!-- END MULTIPLE CORRECT -->
+
+        </div>
+      </div>
+      <div class="clearfix mt-2"></div>
+
+      <button type="submit" class="btn btn-xs btn-primary">Save</button>
+
+
+    </form>
+  </div>
+</div>
