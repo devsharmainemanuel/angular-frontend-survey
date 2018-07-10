@@ -11,11 +11,13 @@ import { SurveyComponent } from './survey/survey.component';
 import { QuestionComponent } from './question/question.component';
 
 import { SurveyService } from './survey.service';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
-    QuestionComponent
+    QuestionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

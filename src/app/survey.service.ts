@@ -15,7 +15,7 @@ interface MyData {
 export class SurveyService {
 
   constructor(private http: HttpClient) { }
-  public base_url = 'http://surveytest.loc/api';
+  public base_url = 'http://laravel-backend-survey.loc/api';
 
 
   getQuestions() {

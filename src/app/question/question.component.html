@@ -1,0 +1,14 @@
+<div>
+  <form [formGroup]="surveyForm" (submit)="onSubmit()">
+    <div formArrayName="questions" *ngFor="let question of questions; let i = index;">
+      <div>
+          {{ question.title }}
+          <input type="text" formControllName="answer">
+          <input type="text" formControllName="value">
+      </div>
+    </div>
+    <div>
+        <input type="submit" value="submit">
+    </div>
+  </form>
+</div>
