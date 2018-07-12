@@ -27,7 +27,7 @@
           <!-- END SINGLE CORRECT -->
 
 
-          <!-- SINGLE CORRECT -->
+          <!-- RATINGS -->
           <div class="row"  *ngIf="question.question_type == 'ratings'">
             <div class="col-md-2 col-md-offset-1">
 
@@ -46,7 +46,7 @@
               <input type="radio" value="5"  required name="{{question.id}}" ngModel> 5
             </div>
           </div>
-          <!-- END SINGLE CORRECT -->
+          <!-- END RATINGS -->
 
           <!-- MULTIPLE CORRECT -->
           <div class="row"  *ngIf="question.question_type == 'multiple'">

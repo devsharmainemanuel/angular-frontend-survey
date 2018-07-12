@@ -33,6 +33,13 @@ export class SurveyService {
   }
 
 
+  submitAnswers(data) {
+        console.log(data);
+        return this.http.post(this.base_url + '/survey/submit', data);
+      }
+
+
+
 
 
 

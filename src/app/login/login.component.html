@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+<form [formGroup]="updateDetailsForm">
+    <div formArrayName="categories">
+     <div class="form-group" *ngFor="let category of categories; let i = index">
+        <label>
+        <span formGroupName="{{i}}">
+          <input type="checkbox" formControlName="{{category.name}}">
+            {{category.name}}
+        </span>
+        </label>
+     </div>
+      </div>
+      <pre>{{updateDetailsForm.value | json}}</pre>
+      </form>
