@@ -9,7 +9,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 export class LoginComponent  {
 
   updateDetailsForm: FormGroup;
-   categories =  [{name: 'one'}, {name: 'two'}, {name: 'threeve'}];
+   categories =  [{name: '1'}, {name: '2'}, {name: '3'}];
 
   constructor(private formBuilder: FormBuilder) {
      this.initForm();

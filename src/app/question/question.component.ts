@@ -52,7 +52,8 @@ export class QuestionComponent implements OnInit , AfterViewInit {
       this.myForm = this.fb.group({
         survey_id: [''],
         username: new FormControl('', Validators.required),
-        questions: this.fb.array(arr)
+        quest: this.fb.array([]),
+        question_id: new FormControl()
       });
 
     });
@@ -68,6 +69,11 @@ export class QuestionComponent implements OnInit , AfterViewInit {
   }
 
 
+  get quest(): FormArray {
+    return this.myForm.get('quest') as FormArray;
+  }
+
+
   ngAfterViewInit() {
       console.log(this.myForm);
   }
@@ -78,6 +84,7 @@ this.options.push(questions.options);
 
 const allOptions: FormArray = new FormArray([]);
 for (let i = 0; i < questions.options.length; i++) {
+  console.log(questions.options[i]);
   const fg = new FormGroup({});
   fg.addControl(questions.options[i].id, new FormControl(false));
   allOptions.push(fg);

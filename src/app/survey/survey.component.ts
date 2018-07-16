@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray, Validators} from '@angular/forms';
 
 import { SurveyService } from '../survey.service';
 import { QuestionBase } from '../question-base';
@@ -25,16 +25,27 @@ export class SurveyComponent implements OnInit {
     // get data from the api and store to question-base//
     this.dataService.getQuestions().subscribe(data => {
       this.questions = data;
-      this.form = this.dataService.toFormGroup(data);
+   //   this.form = this.dataService.toFormGroup(data);
+
+    });
+  }
+
+  buildForm() {
+
+    this.form = new FormGroup({
+      'username': new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)  ]),
     });
   }
 
   onSubmit = function(answer) {
     // display submitted data
     const answers = answer;
-    this.dataService.submitSurvey(answer).subscribe(data => {
-        console.log(data);
-    });
+    console.log(answers);
+    // this.dataService.submitSurvey(answer).subscribe(data => {
+    //     console.log(data);
+    // });
   };
 
   check(value1) {

@@ -50,7 +50,7 @@ export class SurveyService {
 
 //console.log(group[question.id]);
 
-      group[question.survey_id] = question.survey_id ? new FormControl(question.id || '', Validators.required)
+      group[question.id] = question.id ? new FormControl(question.id || '', Validators.required)
       : new FormControl(question.id || '');
     });
     return new FormGroup(group);

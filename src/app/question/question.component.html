@@ -10,79 +10,19 @@
         </div>
 
 
-      <div class="card mt-2" formArrayName="questions" *ngFor="let question of myForm['controls'].questions['controls']; let i = index;">
-        <div formGroupName="{{i}}">
-          <div class="card-header">
-            {{question.get('title').value}}
-          </div>
 
-          <div class="card-body">
+        <div *ngFor="let question of questions">
+            {{question.title}}
 
-            <div  *ngIf="question.get('type').value == 'fillintheblank'">
-              <input type="text" formControlName="value" class="form-control">
-
+            <div formArrayName="quest">
+                <input type="text" formControlName="question.id">
             </div>
 
-            <div  *ngIf="question.get('type').value == 'textarea'">
-              <textarea formControlName="value" class="form-control"></textarea>
-
-            </div>
-
-            <div class="row"  *ngIf="question.get('type').value == 'ratings'">
-                <div class="col-md-2 col-md-offset-1">
-
-                                  <input type="radio" value="1"  formControlName="value"> 1
-                                </div>
-                                <div class="col-md-2">
-                                  <input type="radio" value="2"  formControlName="value"> 2
-                                </div>
-                                <div class="col-md-2">
-                                  <input type="radio" value="3"  formControlName="value"> 3
-                                </div>
-                                <div class="col-md-2">
-                                  <input type="radio" value="4"  formControlName="value"> 4
-                                </div>
-                                <div class="col-md-2">
-                                  <input type="radio" value="5"  formControlName="value"> 5
-                                </div>
-            </div>
-
-
-            <!-- SINGLE CORRECT -->
-            <div class="row"  *ngIf="question.get('type').value == 'single'">
-                <div class="col-md-6" *ngFor="let options of question.get('options').value; let j = index">
-                        <input type="radio" value="{{options.id}}" formControlName="value"> {{options.text}}
-                </div>
-              </div>
-            <!-- END SINGLE CORRECT -->
-
-          <!--  MULTIPLE CORRECT -->
-            <div class="row"  *ngIf="question.get('type').value == 'multiple'">
-
-                <!-- <div formArrayName="options_value">
-                    <div  formGroupName="l" class="form-group" *ngFor="let q of question.get('options_value').value; let l = index">
-
-                         <input type="text" formControlName="q.id">   {{q.text}}
-
-
-                    </div>
-                     </div> -->
-
-
-
-              <!--
-                <input type="checkbox" value="{{options.id}}" formControlName="value"> {{options.text}}
-                <input type="checkbox"  value="{{options.id}}" formControlName="value"> {{options.text}} -->
-
-                <!-- </div> -->
-              </div>
-          <!-- END MULTIPLE CORRECT -->
-            </div>
-          </div>
         </div>
         <div class="clearfix mt-2"></div>
 
         <button type="submit" class="btn btn-xs btn-primary">Save</button>
+
 
       </form>
     </div>

@@ -3,6 +3,12 @@
   <div class="col-md-12 ">
 
     <form #answer="ngForm" (ngSubmit)="onSubmit(answer.value)" >
+      <div class="card-header">
+        Name: <input  type="text" class="form-control" name="username" ngModel>
+
+      </div>
+
+
 
       <div class="card mt-2" *ngFor="let question of questions">
         <div class="card-header">
@@ -16,13 +22,12 @@
           <textarea *ngIf="question.question_type == 'textarea'" type="text" class="form-control" name="{{question.id}}" ngModel></textarea>
           <!-- SINGLE CORRECT -->
           <div class="row"  *ngIf="question.question_type == 'single'">
-            <div class="col-md-6">
+              <div class="col-md-6" *ngFor="let option of question.options; let i = index">
+                  <div ngModelGroup="{{question.id}}">
+                    <input type="radio" name="{{option.id}}" ngModel> {{ option.text }}
+                  </div>
 
-              <input type="radio" value="yes"  required name="{{question.id}}" ngModel> YES
-            </div>
-            <div class="col-md-6">
-              <input type="radio" value="no"  required name="{{question.id}}" ngModel> NO
-            </div>
+                </div>
           </div>
           <!-- END SINGLE CORRECT -->
 
@@ -51,8 +56,8 @@
           <!-- MULTIPLE CORRECT -->
           <div class="row"  *ngIf="question.question_type == 'multiple'">
             <div class="col-md-12" *ngFor="let option of question.options; let i = index">
-              <div ngModelGroupd="i">
-                <input type="checkbox" name="{{question.id}}][{{option.id}}]" ngModel> {{ option.text }}
+              <div ngModelGroup="{{question.id}}">
+                <input type="checkbox" name="{{option.id}}" ngModel> {{ option.text }}
               </div>
 
             </div>
