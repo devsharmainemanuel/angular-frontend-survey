@@ -43,9 +43,9 @@ export class SurveyComponent implements OnInit {
     // display submitted data
     const answers = answer;
     console.log(answers);
-    // this.dataService.submitSurvey(answer).subscribe(data => {
-    //     console.log(data);
-    // });
+    this.dataService.submitSurvey(answer).subscribe(data => {
+        console.log(data);
+    });
   };
 
   check(value1) {

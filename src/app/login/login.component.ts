@@ -1,34 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { UserService } from '../user.service';
+import { Response } from '../response';
 
+import {Router} from '"'@angular/router'"';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
 
-  updateDetailsForm: FormGroup;
-   categories =  [{name: '1'}, {name: '2'}, {name: '3'}];
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  response: any;
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
 
-  constructor(private formBuilder: FormBuilder) {
-     this.initForm();
   }
 
-  initForm() {
-    console.log(this.categories);
-    const allCategories: FormArray = new FormArray([]);
-    for (let i = 0; i < this.categories.length; i++) {
-      const fg = new FormGroup({});
-      fg.addControl(this.categories[i].name, new FormControl(false));
-      allCategories.push(fg);
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+   // convenience getter for easy access to form fields
+   get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
     }
 
-    console.log(allCategories);
+    this.userService.login(this.loginForm.value).subscribe(data => {
+       this.response = data;
+     if ( this.response.response === 'success') {
+     //   console.log(result);
+        this.router.navigate(['dashboard']);
+     }
 
-    this.updateDetailsForm = this.formBuilder.group({
-      'image' : [''],
-      'categories': allCategories
-    });
+   });
   }
 }
